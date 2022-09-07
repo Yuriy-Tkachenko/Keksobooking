@@ -1,4 +1,4 @@
-const popupTemplate = document.querySelector('#card').content.querySelector('.popup');
+/*const popupTemplate = document.querySelector('#card').content.querySelector('.popup');
 
 const makeObject = (object) => {
   const type = {
@@ -43,4 +43,4 @@ const makeObject = (object) => {
   return popupPreview;
 };
 
-export { makeObject };
+export { makeObject };*/

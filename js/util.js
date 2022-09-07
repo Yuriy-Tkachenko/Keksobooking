@@ -55,4 +55,16 @@ const getRandomInteger = (value) => {
   return Math.floor(Math.random() * value);
 };
 
-export { getRandomCoordinats, getRandomElement, getRandomArray, getRandomIntervalInteger, getRandomInteger };
+const setDisabledFormElements = (elements) => {
+  elements.forEach(element => {
+    element.setAttribute('disabled', 'disabled');
+  })
+};
+
+const removeDisabledFormElements = (elements) => { 
+  elements.forEach(element => { 
+    element.removeAttribute('disabled');
+  })
+};
+
+export { getRandomCoordinats, getRandomElement, getRandomArray, getRandomIntervalInteger, getRandomInteger, setDisabledFormElements, removeDisabledFormElements };

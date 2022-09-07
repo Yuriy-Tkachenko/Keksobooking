@@ -1,7 +1,8 @@
 import { OBJECT_LIST_COUNT, AVATAR, TITLE, ADDRESS, TYPE, CHECKIN, CHECKOUT, FEATURES, DESCRIPTION, PHOTOS } from './data.js';
 import { getRandomCoordinats, getRandomElement, getRandomArray, getRandomIntervalInteger, getRandomInteger } from './util.js';
-import { makeObject } from './offer.js';
+//import { makeObject } from './offer.js';
 import './form.js';
+import './map.js';
 
 const canvas = document.querySelector("#map-canvas");
 
@@ -30,7 +31,7 @@ const createObject = () => {
   };
 };
 
-const objectList = new Array(OBJECT_LIST_COUNT).fill(null).map(() => createObject());
+/*const objectList = new Array(OBJECT_LIST_COUNT).fill(null).map(() => createObject());
 
 const renderObject = () => {
   let objectFragment = document.createDocumentFragment();
@@ -42,4 +43,4 @@ const renderObject = () => {
   canvas.appendChild(objectFragment);
 };
 
-renderObject();
+renderObject();*/
