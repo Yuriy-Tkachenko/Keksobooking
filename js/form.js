@@ -1,6 +1,7 @@
 const typeOfHouse = document.getElementById('type');
 const timeIn = document.getElementById('timein');
 const timeOut = document.getElementById('timeout');
+const addressInput = document.getElementById('address');
 
 typeOfHouse.addEventListener('change', (evt) => {
   const price = document.getElementById('price');
@@ -42,3 +43,5 @@ timeOut.addEventListener('change', (evt) => {
     timeIn.options[2].selected = true;
   }
 });
+
+addressInput.setAttribute('readonly', 'readonly');

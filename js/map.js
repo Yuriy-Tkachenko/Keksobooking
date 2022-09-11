@@ -6,6 +6,7 @@ const mapFilter = document.querySelector('.map__filters');
 const mapFilterElements = mapFilter.querySelectorAll('.map__filter');
 const mapFilterInputElements = mapFilter.querySelectorAll('.map__checkbox');
 const mapFilterInputWrapper = mapFilter.querySelector('.map__features');
+const addressInput = document.getElementById('address');
 
 const elementsDisable = () => {
   form.classList.add('ad-form--disabled');
@@ -43,7 +44,7 @@ L.tileLayer(
   },
 ).addTo(map);
 
-//Создаем новый маркер
+//Создаем иконку нового маркера
 const mainPinIcon = L.icon({
   iconUrl: 'img/main-pin.svg',
   iconSize: [52, 52],
@@ -56,6 +57,7 @@ const marker = L.marker(
     lng: 139.2530,
   },
   {
+    // Передвижение маркера
     draggable: true,
     icon: mainPinIcon,
   },
@@ -64,22 +66,52 @@ const marker = L.marker(
 //Добавляем маркер на карту
 marker
   .addTo(map)
-  .bindPopup(title);
+  .bindPopup(title);;
 
-marker.on('moveend', (evt) => { 
-  console.log(evt.target.getLatLng());
+
+marker.on('moveend', (evt) => {
+  //Получаем координаты маркера и добавляем в input
+  addressInput.value = evt.target.getLatLng().lat.toFixed(6) + ', ' + evt.target.getLatLng().lat.toFixed(6);
 })
 
 //Добавляем массив с метками
 const points = [
   {
-    title: 'Ичибан',
+    title: 'Комната',
     lat: 35.7200,
     lng: 136.5353,
   },
   {
-    title: 'Акаси',
+    title: 'Бунгало',
     lat: 35.690,
     lng: 139.690,
   }
 ];
+
+points.forEach(({ lat, lng }) => {
+  //Создаем иконку маркера объявления
+  const adPinIcon = L.icon({
+    iconUrl: 'img/pin.svg',
+    iconSize: [40, 40],
+    iconAnchor: [20, 40],
+  })
+
+  document.getElementById('title').placeholder = '';
+
+  const adMarker = L.marker(
+    {
+      title: 'Дворец',
+      lat,
+      lng,
+    },
+    {
+      icon: adPinIcon,
+    });
+  
+  adMarker
+    .addTo(map)
+    .bindPopup(title),
+  {
+    keepInView: true,
+  };
+});
