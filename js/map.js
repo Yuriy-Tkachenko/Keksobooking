@@ -7,6 +7,7 @@ const mapFilterElements = mapFilter.querySelectorAll('.map__filter');
 const mapFilterInputElements = mapFilter.querySelectorAll('.map__checkbox');
 const mapFilterInputWrapper = mapFilter.querySelector('.map__features');
 const addressInput = document.getElementById('address');
+const popupFeature = document.querySelectorAll('.popup__feature');
 
 const elementsDisable = () => {
   form.classList.add('ad-form--disabled');
@@ -66,8 +67,6 @@ const marker = L.marker(
 //Добавляем маркер на карту
 marker
   .addTo(map)
-  .bindPopup(title);;
-
 
 marker.on('moveend', (evt) => {
   //Получаем координаты маркера и добавляем в input
@@ -88,7 +87,25 @@ const points = [
   }
 ];
 
-points.forEach(({ lat, lng }) => {
+const createCustomPopup = (point) => { 
+  const balloontemplate = document.querySelector('#card').content.querySelector('.popup');
+  const popupElement = balloontemplate.cloneNode(true);
+
+  popupElement.querySelector('.popup__title').textcontent = point.title;
+  popupElement.querySelector('.popup__text--address').textContent = 'Координаты: ${point.lat}, ${point.lng}';
+  
+  for (let i = 0; i <= popupFeature.length; i++) {
+    if (popupFeature.value === null) {
+      popupFeature[i].remove;
+    }
+  }
+
+  return popupElement;
+}
+
+points.forEach((point) => {
+  const {lat, lng} = point;
+
   //Создаем иконку маркера объявления
   const adPinIcon = L.icon({
     iconUrl: 'img/pin.svg',
@@ -110,7 +127,9 @@ points.forEach(({ lat, lng }) => {
   
   adMarker
     .addTo(map)
-    .bindPopup(title),
+    .bindPopup(
+      createCustomPopup(point),
+    ),
   {
     keepInView: true,
   };
