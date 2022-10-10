@@ -3,6 +3,18 @@ import { getRandomCoordinats, getRandomElement, getRandomArray, getRandomInterva
 //import { makeObject } from './offer.js';
 import './form.js';
 import './map.js';
+import { createFetch } from './createFetch.js';
+
+const fetchData = createFetch(
+  (data) => {
+    console.log(data);
+  },
+  (err) => { 
+    console.log(err);
+  }
+)
+
+fetchData();
 
 const canvas = document.querySelector("#map-canvas");
 
