@@ -1,59 +1,29 @@
-const getRandomNumber = (min, max) => {
-  // если мин или макс меньше нуля, вернуть ошибку
-  if (min < 0 || max < 0) {
-    return -1;
-  }
-  // проверка на то, что минимум стал максимумом и наоборот
-  if (max < min) {
-    [min.max][(max, min)];
-  }
+const ALERT_SHOW_TIME = 5000;
 
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+const form = document.querySelector('.ad-form');
+const formElements = form.querySelectorAll('fieldset');
+const mapFilter = document.querySelector('.map__filters');
+const mapFilterElements = mapFilter.querySelectorAll('.map__filter');
+const mapFilterInputElements = mapFilter.querySelectorAll('.map__checkbox');
+const mapFilterInputWrapper = mapFilter.querySelector('.map__features');
+
+const elementsDisable = () => {
+  form.classList.add('ad-form--disabled');
+  mapFilter.classList.add('ad-form--disabled');
+  mapFilterInputWrapper.classList.add('ad-form--disabled');
+  setDisabledFormElements(formElements);
+  setDisabledFormElements(mapFilterElements);
+  setDisabledFormElements(mapFilterInputElements);
 };
 
-const getRandomCoordinats = (min, max, n) => {
-  // Проверка числовое значение или нет
-  if (isNaN(min) || isNaN(max) || isNaN(n)) {
-    return -1;
-  }
-  // Проверка меньше нуля или нет
-  if (min < 0 || max < 0 || n < 0) {
-    return -1;
-  }
-  // Проверка если минимум больше чем максимум
-  if (max < min) {
-    [min.max][(max, min)];
-  }
-
-  return (Math.random() * (max - min + 1) + min).toFixed(n);
-};
-
-const getRandomElement = (elements) => {
-  return elements[_.random(0, elements.length - 1)];
-};
-
-const getRandomArray = (array) => {
-  const newRandomArray = [];
-
-  for (let i = 0; i <= array.length; i++) {
-    const elementIndex = getRandomNumber(0, array.length - 1);
-    const element = array[elementIndex];
-
-    if (!newRandomArray.includes(element)) {
-      newRandomArray.push(element);
-    }
-  }
-
-  return newRandomArray;
-};
-
-const getRandomIntervalInteger = (min, max) => {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-};
-
-const getRandomInteger = (value) => {
-  return Math.floor(Math.random() * value);
-};
+const elementActivate = () => { 
+  form.classList.remove('ad-form--disabled');
+  mapFilter.classList.remove('ad-form--disabled');
+  mapFilterInputWrapper.classList.remove('ad-form--disabled');
+  removeDisabledFormElements(formElements);
+  removeDisabledFormElements(mapFilterElements);
+  removeDisabledFormElements(mapFilterInputElements);
+}
 
 const setDisabledFormElements = (elements) => {
   elements.forEach(element => {
@@ -67,4 +37,77 @@ const removeDisabledFormElements = (elements) => {
   })
 };
 
-export { getRandomCoordinats, getRandomElement, getRandomArray, getRandomIntervalInteger, getRandomInteger, setDisabledFormElements, removeDisabledFormElements };
+const getNumDecline = (num, nominative, genitiveSingular, genitivePlural) => {
+  if (num > 10 && (Math.round((num % 100) / 10)) === 1) {
+    return genitivePlural;
+  } else {
+    switch (num % 10) {
+      case 1: return nominative;
+      case 2:
+      case 3:
+      case 4: return genitiveSingular;
+    }
+    return genitivePlural;
+  }
+};
+
+const showErrorAlert = (message) => {
+  const alertContainer = document.createElement('div');
+  alertContainer.style.zIndex = 100;
+  alertContainer.style.position = 'absolute';
+  alertContainer.style.left = 0;
+  alertContainer.style.top = 0;
+  alertContainer.style.right = 0;
+  alertContainer.style.padding = '10px 3px';
+  alertContainer.style.fontSize = '30px';
+  alertContainer.style.textAlign = 'center';
+  alertContainer.style.backgroundColor = 'red';
+  
+  alertContainer.textContent = message;
+  
+  document.body.append(alertContainer);
+
+  setTimeout(() => {
+    alertContainer.remove();
+  }, ALERT_SHOW_TIME);
+}
+
+const showSuccessAlert = (message) => {
+  const alertContainer = document.createElement('div');
+  alertContainer.style.zIndex = 100;
+  alertContainer.style.position = 'absolute';
+  alertContainer.style.left = 0;
+  alertContainer.style.top = 0;
+  alertContainer.style.right = 0;
+  alertContainer.style.padding = '10px 3px';
+  alertContainer.style.fontSize = '30px';
+  alertContainer.style.textAlign = 'center';
+  alertContainer.style.backgroundColor = 'green';
+  
+  alertContainer.textContent = message;
+  
+  document.body.append(alertContainer);
+
+  setTimeout(() => {
+    alertContainer.remove();
+  }, ALERT_SHOW_TIME);
+}
+
+const onPopupEscKeydown = (evt) => {
+  if (isEscEvent(evt)) {
+    evt.preventDefault();
+    closeUserModal();
+  }
+};
+
+const openUserModal = () => {
+  userModalElement.classList.remove('hidden');
+  document.addEventListener('keydown', onPopupEscKeydown);
+};
+
+const closeUserModal = () => {
+  userModalElement.classList.add('hidden');
+  document.removeEventListener('keydown', onPopupEscKeydown);
+};
+
+export { elementsDisable, elementActivate, getNumDecline, showErrorAlert, showSuccessAlert };
