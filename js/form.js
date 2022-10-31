@@ -14,7 +14,6 @@ const MIN_PRICE = {
 }
 
 const form = document.querySelector('.ad-form');
-const formList = form.children;
 const titleForm = form.querySelector('#title');
 const typeForm = form.querySelector('#type');
 const priceForm = form.querySelector('#price');
@@ -119,4 +118,15 @@ const activateAd = () => {
   }
 }
 
-export { getAddress }
+//Сброс данных формы
+const formResetButton = () => {
+  formReset.addEventListener('click', (evt) => {
+    formList.reset();
+  })
+}
+
+const resetForm = () => {
+  form.reset();
+}
+
+export { getAddress, resetForm }

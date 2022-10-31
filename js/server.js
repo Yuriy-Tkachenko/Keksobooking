@@ -1,5 +1,6 @@
 import { createMapPin } from './map.js';
 import { showSuccessAlert, showErrorAlert } from './util.js';
+import { resetForm } from './form.js';
 
 const form = document.querySelector('.ad-form');
 const urls = {
@@ -45,12 +46,12 @@ const sendData = (onSuccess, onError) => {
 
 const successPost = () => {
   showSuccessAlert(POST_OK);
-  
+  resetForm()
 }
 
 const errorPost = () => {
   showErrorAlert(POST_ERROR);
-  
+  resetForm();
 }
 
 sendData(successPost, errorPost);
