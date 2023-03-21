@@ -13,7 +13,7 @@ This website was created for booking accommodation in Tokio city, as part of tra
 To run this project, install it locally using npm:
 
 ```
-$ cd ../Sedona
+$ cd ../keksobooking
 $ npm install
 $ npm start
 ```
